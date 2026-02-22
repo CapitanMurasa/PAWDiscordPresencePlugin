@@ -1,6 +1,10 @@
 import PAW_python as paw
-from pypresence import Presence
 import time, sys
+
+script_dir = os.path.dirname(__file__)
+sys.path.append(os.path.join(script_dir, "libs"))
+
+import pypresence
 
 player = paw.PAW()
 player.setInfo("Discord PAW plugin")
