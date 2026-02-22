@@ -1,16 +1,9 @@
 import PAW_python as paw
 from pypresence import Presence
-import time
+import time, sys
 
 player = paw.PAW()
 player.setInfo("Discord PAW plugin")
-
-try:
-    drp = Presence("1470437029253873861")
-    drp.connect()
-    print("Discord Connected")
-except Exception as e:
-    print(f"Discord failed: {e}")
 
 def update():
     try:
@@ -27,9 +20,16 @@ def update():
             drp.clear()
             
     except Exception as e:
-        print(f"RPC Error: {e}")
+        player.SendMessageBox(f"RPC Error: {e}")
+
+try:
+    drp = Presence("1470437029253873861")
+    drp.connect()
+    player.SendMessageBox("Discord Connected")
+except Exception as e:
+    player.SendMessageBox(f"Discord failed: {e}")
+else:
+    player.register_update(update, 5000)
 
 
-player.register_update(update, 5000)
 
-print("Discord Plugin Registered Successfully")
